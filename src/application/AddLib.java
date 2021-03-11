@@ -1,17 +1,14 @@
 package application;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
 public class AddLib {
 	@FXML 
 	private TextField usernameLib, fnameLib, lnameLib, phoneLib, emailLib;
@@ -22,12 +19,22 @@ public class AddLib {
 	@FXML 
 	private Label libRegisterError;
 	
-	public void registerLib() throws SQLException {
+	private static Statement statement;
+	private static ResultSet resultDB;
+	
+	public void setResultDB(String query) throws SQLException {
 		DatabaseConnection connectNow = new DatabaseConnection();
 		Connection connectDB = connectNow.getConnection();
-		Statement statement = connectDB.createStatement();
+		statement = connectDB.createStatement();
+		resultDB = statement.executeQuery(query);
+	}
+	/**
+	 * Register an Librarian, add one to the database
+	 * @throws SQLException
+	 */
+	public void registerLib() throws SQLException {
 		try {
-			ResultSet resultDB = statement.executeQuery("Select MAX(Lib_id) FROM Lib");
+			setResultDB("Select MAX(Lib_id) FROM Lib");
 			int max_id = resultDB.next() == true ? resultDB.getInt(1) + 1 : 0;
 			
 			String insertLib = ("insert into Lib (Lib_id, FName, LName, Username, Password, Email, PhoneNumber) "
@@ -43,6 +50,10 @@ public class AddLib {
 			e.getCause();
 		}
 	}
+	/**
+	 * Check the information, call registerLib() if correct
+	 * @param event
+	 */
 	public void checkRegister(ActionEvent event) {
 		
 		if(usernameLib.getText().length() == 0 || fnameLib.getText().length() == 0 || lnameLib.getText().length() == 0 || phoneLib.getText().length() == 0 
@@ -51,7 +62,6 @@ public class AddLib {
 		
 		else if(!passwordLib1.getText().equals(passwordLib2.getText())) 
 			libRegisterError.setText("Password do not match!");
-
 		else {
 			Alert a1 = new Alert(Alert.AlertType.INFORMATION);
 			a1.setHeaderText("Librarian " + usernameLib.getText() + " added!");
@@ -65,5 +75,4 @@ public class AddLib {
 			}
 		}
 	}
-
 }

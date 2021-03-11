@@ -52,7 +52,7 @@ public class Login implements Initializable {
 	}
 	
 	/**
-	 * Check if username and password are in the database, display if incorrect.
+	 * Check if username and password are in the database, display error if incorrect, else change window to AdminDashBoard
 	 * @throws IOException
 	 */
 	private void checkAdminLogin() throws IOException {
@@ -110,10 +110,9 @@ public class Login implements Initializable {
 	}
 	@Override
 	public void initialize(URL url, ResourceBundle rsb) {
-		// TODO Auto-generated method stub
 		loginChoice.getItems().add("Admin");
 		loginChoice.getItems().add("Librarian");
-		loginChoice.getItems().add("Student");
+
 		
 	}
 	

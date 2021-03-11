@@ -12,7 +12,6 @@ import javafx.scene.text.Text;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 
-
 public class Main extends Application {
 	private static Stage stage;
 	private static BorderPane rootPane;
@@ -32,7 +31,10 @@ public class Main extends Application {
 			e.printStackTrace();
 		}
 	}
-
+	/**	
+	 * Change scene in a window	
+	 * @param fxmlFile which fxmlFile to change the window to	
+	 */	
 	public void changeScene(String fxmlFile) {
 		try {
 			rootPane = FXMLLoader.load(getClass().getResource(fxmlFile));
@@ -43,6 +45,10 @@ public class Main extends Application {
 		}
 
 	}
+	/**	
+	 * Change scene in a Stage	
+	 * @param fxmlFile which fxmlFile to add to the AdminDashBoard	
+	 */
 	public void addScene(String fxmlFile) {
 
 		try {

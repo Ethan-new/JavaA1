@@ -7,7 +7,7 @@ public class DatabaseConnection {
 	
 	public Connection getConnection() {
 		String databaseName = "A1db.db";
-		String url = "jdbc:sqlite:C:\\Users\\spart\\Desktop\\TestFx15\\src\\application\\" + databaseName;
+		String url = "jdbc:sqlite:./src/application/" + databaseName;
 		try {
 			databaseLink = DriverManager.getConnection(url);
 		} catch(Exception e) {

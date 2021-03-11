@@ -15,11 +15,17 @@ public class addBook {
 	
 	@FXML 
 	private TextField bookName, bookAuthor, bookYear, bookQuantity, bookType;
-	
+	@FXML 
+	private Label addItemError;
 
 
 	
-	
+	public void checkBook() throws Exception {
+		if(bookName.getText().length() == 0 || bookAuthor.getText().length() == 0 || bookYear.getText().length() == 0  || bookQuantity.getText().length() == 0  || bookType.getText().length() == 0)
+			addItemError.setText("Information can't be empty!");
+		else 
+			registerBook();
+	}
 	
 	public void registerBook() throws SQLException {
 		

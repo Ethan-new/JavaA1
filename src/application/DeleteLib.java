@@ -42,10 +42,20 @@ public class DeleteLib implements Initializable{
 	
 	@FXML 
 	private TableColumn<Librarian, Button> deleteCol;
-
+	
+	private static Statement statement;
+	private static ResultSet resultDB;
+	
+	public void setResultDB(String query) throws SQLException {
+		DatabaseConnection connectNow = new DatabaseConnection();
+		Connection connectDB = connectNow.getConnection();
+		statement = connectDB.createStatement();
+		resultDB = statement.executeQuery(query);
+	}
 	@Override
 	public void initialize(URL url, ResourceBundle rsb) {
-		// TODO Auto-generated method stub
+		//Basically what serCellValueFactory does is to get the property specified of the Librarian object in PropertyValueFactory.
+		//You also need to create public getter function in Librarian class.
 		idCol.setCellValueFactory(new PropertyValueFactory<Librarian, Integer>("Lib_id"));
 		fnameCol.setCellValueFactory(new PropertyValueFactory<Librarian, String>("FName"));
 		lnameCol.setCellValueFactory(new PropertyValueFactory<Librarian, String>("LName"));
@@ -53,16 +63,13 @@ public class DeleteLib implements Initializable{
 		phoneCol.setCellValueFactory(new PropertyValueFactory<Librarian, String>("Phone"));
 		emailCol.setCellValueFactory(new PropertyValueFactory<Librarian, String>("Email"));
 		
-		DatabaseConnection connectNow = new DatabaseConnection();
-		Connection connectDB = connectNow.getConnection();
 		final ObservableList<Librarian> data = FXCollections.observableArrayList();
 		
 		try {
-			Statement statement = connectDB.createStatement();
-			ResultSet resultLib = statement.executeQuery("SELECT * FROM Lib");
-			while(resultLib.next()) {
-				data.add( new Librarian( resultLib.getInt("Lib_id"), resultLib.getString("FName"), resultLib.getString("LName")
-						, resultLib.getString("Username"), resultLib.getString("PhoneNumber"), resultLib.getString("Email")));
+			setResultDB("SELECT * FROM Lib");
+			while(resultDB.next()) {
+				data.add( new Librarian( resultDB.getInt("Lib_id"), resultDB.getString("FName"), resultDB.getString("LName")
+						, resultDB.getString("Username"), resultDB.getString("PhoneNumber"), resultDB.getString("Email")));
 				
 			}
 			table.setItems(data);
@@ -74,18 +81,18 @@ public class DeleteLib implements Initializable{
 		}
 	}
 	@FXML 
+	/**
+	 * Delete a record selected in the tableview. 
+	 * @param event
+	 */
 	private void deleteALib(ActionEvent event) {
 		table.getItems().removeAll(table.getSelectionModel().getSelectedItems());
-		System.out.println(table.getSelectionModel().getSelectedItem().getLib_id());
+
 		int lib_id = table.getSelectionModel().getSelectedItem().getLib_id();
-		DatabaseConnection connectNow = new DatabaseConnection();
-		Connection connectDB = connectNow.getConnection();
-		Statement statement;
+		
 		try {
-			statement = connectDB.createStatement();
 			statement.execute("DELETE FROM Lib WHERE Lib_id = " + lib_id);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

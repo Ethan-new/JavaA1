@@ -34,7 +34,7 @@
                   <Font size="20.0" />
                </font>
             </Text>
-            <Button layoutX="291.0" layoutY="377.0" mnemonicParsing="false" onAction="#registerBook" prefHeight="44.0" prefWidth="171.0" text="Add Book" />
+            <Button layoutX="290.0" layoutY="400.0" mnemonicParsing="false" onAction="#checkBook" prefHeight="44.0" prefWidth="171.0" text="Add Book" />
             <Label fx:id="libRegisterError" layoutX="45.0" layoutY="462.0" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="663.0" textFill="RED">
                <font>
                   <Font size="18.0" />
@@ -53,6 +53,11 @@
                   <Font size="20.0" />
                </font>
             </Text>
+            <Label fx:id="addItemError" layoutX="363.0" layoutY="366.0" textFill="RED">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>

@@ -12,8 +12,6 @@ import javafx.scene.text.Text;
 
 public class AdminDashBoard implements Initializable {
 	
-	
-	
 	@FXML 
 	private Text welcomeAdmin;
 	
@@ -27,19 +25,20 @@ public class AdminDashBoard implements Initializable {
 	}
 	public void adminHome(ActionEvent event) {
 		Main main = new Main();
-		welcomeAdmin.setText("Welcome!");
 		welcomeAdmin.setFont(Font.font(40));
 		main.addScene("none");
 	}
 	public void deleteLib(ActionEvent event) {
-		System.out.println("Delete");
 		Main main = new Main();
-
 		main.addScene("DeleteLib.fxml");
 	}
 	public void viewLib(ActionEvent event) {
 		Main main = new Main();
 		main.addScene("ViewLib.fxml");
+	}
+	public void logOut(ActionEvent event) {
+		Main main = new Main();
+		main.changeScene("Login.fxml");
 	}
 	@Override
 	public void initialize(URL url, ResourceBundle rsb) {
