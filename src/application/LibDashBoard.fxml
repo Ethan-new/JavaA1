@@ -38,6 +38,7 @@
                   <Insets top="12.0" />
                </VBox.margin>
             </Button>
+            <Button mnemonicParsing="false" onAction="#returnBook" prefHeight="35.0" prefWidth="248.0" text="Return Book" />
             <Button mnemonicParsing="false" onAction="#adminHome" prefHeight="35.0" prefWidth="250.0" text="Home">
                <VBox.margin>
                   <Insets top="12.0" />

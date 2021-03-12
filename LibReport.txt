@@ -1,0 +1,3 @@
+ItemID  Title                    Author    Year      Type      Quantity  LendOutQuantity
+1       The Epic Tales           Ethan Um  2021      Book      30        29        
+2       The Best Movie           Tue       2019      Movie     5         2         

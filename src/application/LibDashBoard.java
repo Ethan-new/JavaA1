@@ -34,6 +34,11 @@ public class LibDashBoard implements Initializable{
 		Main main = new Main();
 		main.addScene("RentBook.fxml");
 	}
+	public void returnBook() {
+		
+		Main main = new Main();
+		main.addScene("ReturnBook.fxml");
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rsb) {

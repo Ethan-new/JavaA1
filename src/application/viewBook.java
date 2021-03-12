@@ -1,5 +1,6 @@
 package application;
 
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -59,6 +60,7 @@ public class viewBook  implements Initializable {
 		final ObservableList<Book> data = FXCollections.observableArrayList();
 		
 		try {
+			GenerateLibReport.writeFile();
 			Statement statement = connectDB.createStatement();
 			ResultSet resultLib = statement.executeQuery("SELECT * FROM Book");
 			while(resultLib.next()) {
@@ -67,7 +69,7 @@ public class viewBook  implements Initializable {
 			}
 			table.setItems(data);
 			//table.getColumns().addAll(idCol);
-		} catch (SQLException e) {
+		} catch (SQLException | FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			e.getCause();
